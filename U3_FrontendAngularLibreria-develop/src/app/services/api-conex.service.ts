@@ -12,15 +12,24 @@ import { CategoriaModel } from '../Models/categoria.model';
 })
 export class ApiConexService {
 
+
     private urlBase = "https://localhost:7263/api";
     private urlClientes = `${this.urlBase}/Clientes`;
     private urlLibros = `${this.urlBase}/Libros`; 
     private urlCategoria = `${this.urlBase}/categorias`;
     private urlProveedores = `${this.urlBase}/Proveedores`; 
+    private urlLogin = `${this.urlBase}/clientes/login`;
 
     constructor(private http: HttpClient){}
 
-    // Metodos del Cliente
+    // MÉTODO DE AUTENTICACIÓN (LOGIN)
+
+    login(credenciales: any): Observable<any> {
+        return this.http.post<any>(this.urlLogin, credenciales);
+    }
+
+    // MÉTODOS DEL CLIENTE
+
     CrearCliente(cliente: ClienteModel): Observable<ClienteModel>{
         return this.http.post<ClienteModel>(this.urlClientes, cliente);
     }
@@ -37,7 +46,7 @@ export class ApiConexService {
         return this.http.get<ClienteModel[]>(this.urlClientes);
     }
 
-    // Metodos del Libro
+    // MÉTODOS DEL LIBRO
     CrearLibro(libro: LibroModel): Observable<LibroModel>{
         return this.http.post<LibroModel>(this.urlLibros, libro);
     }
@@ -54,7 +63,7 @@ export class ApiConexService {
         return this.http.get<any>(this.urlLibros);
     }
 
-    // Metodos de las categorias
+    // MÉTODOS DE LAS CATEGORÍAS
     CrearCategoria(categoria: CategoriaModel): Observable<CategoriaModel>{
         return this.http.post<CategoriaModel>(this.urlCategoria, categoria);
     }
@@ -71,7 +80,7 @@ export class ApiConexService {
         return this.http.get<any>(this.urlCategoria);
     }
 
-    // Metodos del Proveedor
+    // MÉTODOS DEL PROVEEDOR
     CrearProveedor(Proveedor: ProveedoresModel): Observable<ProveedoresModel>{
         return this.http.post<ProveedoresModel>(this.urlProveedores, Proveedor);
     }
@@ -88,8 +97,8 @@ export class ApiConexService {
         return this.http.get<ProveedoresModel[]>(this.urlProveedores);
     }
 
-    // Metodos de la Venta
-    guardarVenta(venta: VentaModel){
+    // MÉTODOS DE LA VENTA
+    guardarVenta(venta: VentaModel): Observable<VentaModel>{
         return this.http.post<VentaModel>(`${this.urlBase}/Ventas`, venta);
     }
 }

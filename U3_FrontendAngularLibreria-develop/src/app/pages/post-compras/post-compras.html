@@ -1,0 +1,89 @@
+<div class="imagen-superior">
+  <img src="BookSphere_page.jpg" alt="BookSphere Banner">
+</div>
+
+<div class="barra-busqueda">
+  <div class="contenedor-busqueda">
+    <select [(ngModel)]="categoriaSelect">
+      <option value="Todas">Todas las categorías</option>
+      <option *ngFor="let cat of categorias" [value]="cat.nombre">
+        {{ cat.nombre }}
+      </option>
+    </select>
+
+    <input 
+      type="text" 
+      class="input-busqueda" 
+      [(ngModel)]="textoBusqueda"
+      placeholder="Buscar libros, autores, categorías...">
+    
+    <button class="btn-buscar">🔍 Buscar</button>
+    
+    <button class="btn-Login">
+      <div class="contenido-perfil">
+        <img src="Perfil.jpg" alt="Perfil" class="img-perfil">
+        <span class="texto-usuario">Usuario</span>
+      </div>
+    </button>
+  </div>
+</div>
+
+<!-- ========== CARRUSEL: Todos los libros (o filtrados) ========== -->
+<section class="carrusel-section">
+  <h2 class="carrusel-titulo">📚 {{ categoriaSelect === 'Todas' ? 'Todos los libros' : categoriaSelect }}</h2>
+  <div class="carrusel-container">
+    <button class="carrusel-btn previo"></button>
+    <div class="carrusel">
+      <div class="tarjeta-libro" *ngFor="let libro of librosFiltrados">
+        <h3>{{ libro.titulo }}</h3>
+        <img src="images/test.jpg">
+        <p>{{ libro.autor }}</p>
+        <span class="precio">${{ libro.precio }}</span>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+    </div>
+    <button class="carrusel-btn siguiente"></button>
+  </div>
+</section>
+
+<!-- ========== CARRUSEL: Ciencia ========== -->
+<section class="carrusel-section" *ngIf="categoriaSelect === 'Todas' || categoriaSelect === 'Ciencia'">
+  <h2 class="carrusel-titulo">🔬 Ciencia</h2>
+  <div class="carrusel-container">
+    <button class="carrusel-btn previo"></button>
+    <div class="carrusel">
+      <div class="tarjeta-libro" *ngFor="let libro of librosCiencia">
+        <h3>{{ libro.titulo }}</h3>
+        <img src="images/test.jpg">
+        <p>{{ libro.autor }}</p>
+        <span class="precio">${{ libro.precio }}</span>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+    </div>
+    <button class="carrusel-btn siguiente"></button>
+  </div>
+</section>
+
+<!-- ========== CARRUSEL: Historia ========== -->
+<section class="carrusel-section" *ngIf="categoriaSelect === 'Todas' || categoriaSelect === 'Historia'">
+  <h2 class="carrusel-titulo">📜 Historia</h2>
+  <div class="carrusel-container">
+    <button class="carrusel-btn previo"></button>
+    <div class="carrusel">
+      <div class="tarjeta-libro" *ngFor="let libro of librosHistoria">
+        <h3>{{ libro.titulo }}</h3>
+        <img src="images/test.jpg">
+        <p>{{ libro.autor }}</p>
+        <span class="precio">${{ libro.precio }}</span>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+    </div>
+    <button class="carrusel-btn siguiente"></button>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>¿Quieres vender tus libros?</h2>
+  <p>Regístrate y publica tus libros de segunda mano</p>
+  <button class="btn-vender">Comenzar a vender</button>
+</section>
